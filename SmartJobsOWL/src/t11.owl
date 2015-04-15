@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns="http://www.owl-ontologies.com/Ontology1428349867.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sqwrl="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#"
+  xml:base="http://www.owl-ontologies.com/Ontology1428349867.owl">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://swrl.stanford.edu/ontologies/3.3/swrla.owl"/>
+    <owl:imports rdf:resource="http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="company"/>
+  <owl:Class rdf:ID="skill"/>
+  <owl:Class rdf:ID="tutor"/>
+  <owl:ObjectProperty rdf:ID="isoptionfor">
+    <rdfs:domain rdf:resource="#tutor"/>
+    <rdfs:range rdf:resource="#company"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="taughtby">
+    <rdfs:range rdf:resource="#tutor"/>
+    <rdfs:domain rdf:resource="#skill"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="requires">
+    <rdfs:range rdf:resource="#skill"/>
+    <rdfs:domain rdf:resource="#company"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="tname">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#tutor"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="sname">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#skill"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="cname">
+    <rdfs:domain rdf:resource="#company"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <rdf:Description rdf:about="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleGroupEnabled">
+    <rdfs:domain rdf:resource="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#Entity"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#hasRuleGroup">
+    <rdfs:range rdf:resource="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#Entity"/>
+  </rdf:Description>
+  <swrl:Imp rdf:about="http://www.owl-ontologies.com/Rule1">
+    <swrl:body>
+      <swrl:AtomList>
+        <rdf:first>
+          <swrl:ClassAtom>
+            <swrl:argument1>
+              <swrl:Variable rdf:ID="x"/>
+            </swrl:argument1>
+            <swrl:classPredicate rdf:resource="#company"/>
+          </swrl:ClassAtom>
+        </rdf:first>
+        <rdf:rest>
+          <swrl:AtomList>
+            <rdf:rest>
+              <swrl:AtomList>
+                <rdf:first>
+                  <swrl:ClassAtom>
+                    <swrl:argument1>
+                      <swrl:Variable rdf:ID="z"/>
+                    </swrl:argument1>
+                    <swrl:classPredicate rdf:resource="#tutor"/>
+                  </swrl:ClassAtom>
+                </rdf:first>
+                <rdf:rest>
+                  <swrl:AtomList>
+                    <rdf:first>
+                      <swrl:IndividualPropertyAtom>
+                        <swrl:propertyPredicate rdf:resource="#requires"/>
+                        <swrl:argument1 rdf:resource="#x"/>
+                        <swrl:argument2>
+                          <swrl:Variable rdf:ID="y"/>
+                        </swrl:argument2>
+                      </swrl:IndividualPropertyAtom>
+                    </rdf:first>
+                    <rdf:rest>
+                      <swrl:AtomList>
+                        <rdf:first>
+                          <swrl:IndividualPropertyAtom>
+                            <swrl:propertyPredicate rdf:resource="#taughtby"/>
+                            <swrl:argument1 rdf:resource="#y"/>
+                            <swrl:argument2 rdf:resource="#z"/>
+                          </swrl:IndividualPropertyAtom>
+                        </rdf:first>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                      </swrl:AtomList>
+                    </rdf:rest>
+                  </swrl:AtomList>
+                </rdf:rest>
+              </swrl:AtomList>
+            </rdf:rest>
+            <rdf:first>
+              <swrl:ClassAtom>
+                <swrl:argument1 rdf:resource="#y"/>
+                <swrl:classPredicate rdf:resource="#skill"/>
+              </swrl:ClassAtom>
+            </rdf:first>
+          </swrl:AtomList>
+        </rdf:rest>
+      </swrl:AtomList>
+    </swrl:body>
+    <swrl:head>
+      <swrl:AtomList>
+        <rdf:first>
+          <swrl:IndividualPropertyAtom>
+            <swrl:propertyPredicate rdf:resource="#isoptionfor"/>
+            <swrl:argument2 rdf:resource="#x"/>
+            <swrl:argument1 rdf:resource="#z"/>
+          </swrl:IndividualPropertyAtom>
+        </rdf:first>
+        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+      </swrl:AtomList>
+    </swrl:head>
+  </swrl:Imp>
+  <skill rdf:ID="s2">
+    <sname rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >java</sname>
+    <taughtby>
+      <tutor rdf:ID="t2">
+        <isoptionfor>
+          <company rdf:ID="c3">
+            <cname rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >wipro</cname>
+            <requires rdf:resource="#s2"/>
+          </company>
+        </isoptionfor>
+        <isoptionfor>
+          <company rdf:ID="c1">
+            <cname rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >infosys</cname>
+            <requires rdf:resource="#s2"/>
+          </company>
+        </isoptionfor>
+        <tname rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >abc</tname>
+      </tutor>
+    </taughtby>
+  </skill>
+  <tutor rdf:ID="t1">
+    <tname rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >def</tname>
+    <isoptionfor>
+      <company rdf:ID="c2">
+        <cname rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >tcs</cname>
+        <requires>
+          <skill rdf:ID="s1">
+            <taughtby rdf:resource="#t1"/>
+            <sname rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >cpp</sname>
+          </skill>
+        </requires>
+      </company>
+    </isoptionfor>
+  </tutor>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.5, Build 663)  http://protege.stanford.edu -->
